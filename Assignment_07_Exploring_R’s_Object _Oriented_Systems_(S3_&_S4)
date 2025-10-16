@@ -1,0 +1,64 @@
+########################
+#S3 Object
+########################
+#Ex)
+#s3_obj <- list(name = "Myself", age = 29, GPA = 3.5)
+#class(s3_obj) <- "student_s3"
+
+#List with required components
+s3_obj_phone <- list(
+  brand = "Samsung",
+  os = "UI 8",
+  battery_level = 69)
+
+#Appropriately named class
+class(s3_obj_phone) <- "phone_s3" 
+
+#Constructor function for s3 object
+phone_s3 <- function(b, o, bl) {
+  value <- list(
+    brand = b,
+    os = o,
+    battery_level = bl)
+  attr(value, "class") <- "phone_s3"
+}
+
+#Creation of new object via constructor
+s3_object_phone_2 <- phone_s3(
+  "Apple",
+  "IOS",
+  24)
+
+########################
+#S4 Object
+########################
+#Ex)
+#setClass("student_s4",
+#        slots = c(name = "character", age = "numeric", GPA = "numeric"))
+
+#s4_obj <- new("student_s4", name = "Myself", age = 29, GPA = 3.5)
+
+setClass("phone_s4", 
+         slots = list(
+           brand = "character",
+           os = "character",
+           battery_level = "numeric"))
+
+s4_obj_phone <- new("phone_s4",
+                    brand = "Samsung",
+                    os = "UI 8",
+                    battery_level = 69)
+
+#Class System Inspection
+isS4(s3_obj_phone)
+isS4(s4_obj_phone)
+
+class(s3_obj_phone)
+class(s4_obj_phone)
+
+#Type Inspection
+typeof(s3_obj_phone)
+typeof(s4_obj_phone)
+
+str(s3_obj_phone)
+str(s4_obj_phone)
