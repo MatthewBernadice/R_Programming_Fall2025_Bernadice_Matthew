@@ -1,6 +1,8 @@
 #1.1
-# choose file interactively
-student6 <- read.table(file.choose(), header = TRUE,sep = ",", stringsAsFactors = FALSE)
+# choose file interactively 
+#with read.table(file.choose(), ....)
+student6 <- read.table("C:/Users/matth/OneDrive/Desktop/LIS4805 PreAnalytics/Assignment 6 Dataset.txt", header = TRUE,sep = ",", stringsAsFactors = FALSE)
+student6 <- as.data.frame(student6)
 
 #1.2
 library(plyr)
@@ -10,6 +12,7 @@ gender_mean <- ddply(
   summarise,
   GradeAverage = mean(Grade, na.rm = TRUE)
 )
+gender_mean <- as.data.frame(gender_mean)
 
 #1.3
 write.table(
