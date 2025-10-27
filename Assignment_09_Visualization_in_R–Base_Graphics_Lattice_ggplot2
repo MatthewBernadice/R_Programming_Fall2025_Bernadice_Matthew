@@ -1,0 +1,44 @@
+#1) Base R Graphics
+#Create at least two plots using base R functions. Examples:
+# Scatter plot
+plot(mtcars$mpg, mtcars$cyl,
+     main   = "Base:MPG vs. Cylinders",
+     xlab   = "MPG",
+     ylab   = "Cylinders")
+
+# Histogram
+hist(mtcars$wt,
+     main   = "Base: Distribution of Vehicle Weight",
+     xlab   = "Vehicle Weight")
+
+
+#2) Lattice Graphics
+#Use the lattice package to produce conditioned or multivariate plots. Examples:
+library(lattice)
+
+# Conditional scatter plot (small multiples)
+xyplot(mpg ~ wt | factor(cyl),
+       data = mtcars,
+       main = "Lattice: MPG vs. Weight by Cylinders")
+
+# Box-and-whisker plot
+bwplot(mpg ~ factor(cyl),
+       data = mtcars,
+       main = "Lattice: MPG by category(Cylinder)")
+
+
+#3) ggplot2
+#Use ggplot2’s grammar of graphics to create layered visuals. Examples:
+library(ggplot2)
+
+# Scatter plot with smoothing
+ggplot(mtcars, aes(x = wt, y = mpg, color = factor(cyl))) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  labs(title = "ggplot2: MPG vs. Weight with trend by group(Cylinder)")
+
+# Faceted histogram
+ggplot(mtcars, aes(x = mpg)) +
+  geom_histogram(binwidth = 1) +
+  facet_wrap(~ cyl) +
+  labs(title = "ggplot2: MPG distribution by Cylinders")
