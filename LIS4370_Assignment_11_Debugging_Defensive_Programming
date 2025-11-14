@@ -1,0 +1,30 @@
+#Creating tukey outlier function
+tukey.outlier <- function(x) {
+  Q1 <- quantile(x, 0.25, na.rm = TRUE)
+  Q3 <- quantile(x, 0.75, na.rm = TRUE)
+  IQR <- Q3 - Q1
+  
+  lower_bound <- Q1 - 1.5 * IQR
+  upper_bound <- Q3 + 1.5 * IQR
+  
+  # Return TRUE for outliers, FALSE otherwise
+  x < lower_bound | x > upper_bound
+}
+
+corrected_tukey <- function(x) {
+  outliers <- array(TRUE, dim = dim(x))
+  for (j in seq_len(ncol(x))) {
+    outliers[, j] <- outliers[, j] & tukey.outlier(x[, j])
+  }
+  outlier.vec <- logical(nrow(x))
+  for (i in seq_len(nrow(x))) {
+    outlier.vec[i] <- all(outliers[i, ])
+  }
+  outlier.vec
+}
+
+
+# Test on the same matrix
+set.seed(123)
+test_mat <- matrix(rnorm(50), nrow = 10)
+corrected_tukey(test_mat)
